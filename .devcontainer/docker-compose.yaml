@@ -1,0 +1,58 @@
+version: "3"
+
+services:
+  odoo:
+    image: odoo-local:dev
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+      args:
+        # change the ODOO_BASE_IMAGE variable to whatever docker image you want to use
+        - ODOO_BASE_IMAGE=odoo:15
+    command: --dev all
+    depends_on:
+      - db
+    environment:
+      - TZ=Etc/UTC
+      - PYTHONUNBUFFERED=1
+    ports:
+      - "8069:8069"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - odoo-data:/var/lib/odoo
+      - ../addons/:/mnt/extra-addons/
+    networks:
+      - odoo-dev
+
+  db:
+    image: postgres:13
+    environment:
+      - TZ=Etc/UTC
+      - POSTGRES_PASSWORD=odoo
+      - POSTGRES_USER=odoo
+      - POSTGRES_DB=postgres
+      - PGDATA=/var/lib/postgresql/data/pgdata
+    volumes:
+      - db-data:/var/lib/postgresql/data/pgdata
+    networks:
+      - odoo-dev
+
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=admin@pgadmin.org
+      - PGADMIN_DEFAULT_PASSWORD=PgAdminPW!
+    ports:
+      - "8080:80"
+    volumes:
+      - ./pgadmin4.db:/var/lib/pgadmin/pgadmin4.db
+    networks:
+      - odoo-dev
+
+volumes:
+  odoo-data:
+  db-data:
+
+networks:
+  odoo-dev:
+    driver: bridge

@@ -1,0 +1,48 @@
+ARG ODOO_BASE_IMAGE=odoo:latest
+FROM $ODOO_BASE_IMAGE
+
+LABEL maintainer="Paul Miu <miu.manu@gmx.de>"
+
+USER root
+
+ARG DEBIAN_FRONTEND=noninteractive
+
+RUN \
+    # update apt packages lists
+    apt-get update --fix-missing && \
+    # install apt-utils first cause it's a dependency for the following install commands
+    apt-get install -y --no-install-recommends apt-utils && \
+    # install all dev tools
+    apt-get install -y python3-pip git fish procps locales fzf fd-find ripgrep jq && \
+    # install bat (https://github.com/sharkdp/bat)
+    curl -sLO https://github.com/sharkdp/bat/releases/download/v0.18.0/bat_0.18.0_amd64.deb && \
+    dpkg -i bat_0.18.0_amd64.deb && rm -f bat_0.18.0_amd64.deb && \
+    # install fzf (https://github.com/junegunn/fzf)
+    curl -sLO https://github.com/junegunn/fzf/releases/download/0.26.0/fzf-0.26.0-linux_amd64.tar.gz && \
+    tar xvzf fzf-0.26.0-linux_amd64.tar.gz && mv fzf /usr/local/bin/ && rm -f fzf-0.26.0-linux_amd64.tar.gz && \
+    # generate locale
+    sed -i '/en_US.UTF-8/s/^# //g' /etc/locale.gen && locale-gen && \
+    # install python development modules
+    pip3 install black pylint flake8 debugpy && \
+    # install docker
+    bash <(curl -sL https://get.docker.com) && \
+    # install docker-compose
+    curl -sL "https://github.com/docker/compose/releases/download/1.28.6/docker-compose-$(uname -s)-$(uname -m)" \
+         -o /usr/local/bin/docker-compose && \
+    chmod +x /usr/local/bin/docker-compose && \
+    # install dotfiles
+    git clone https://github.com/andsens/homeshick.git "$HOME/.homesick/repos/homeshick" && \
+    "$HOME/.homesick/repos/homeshick/bin/homeshick" clone -b mamiu/dotfiles && \
+    "$HOME/.homesick/repos/homeshick/bin/homeshick" link -f dotfiles && \
+    # install fish packages
+    fish -c "curl -sL https://git.io/fisher | source && fisher update" && \
+    # keep the old odoo binary as odoo-bin
+    mv /usr/bin/odoo /usr/bin/odoo-bin && \
+    # create odoo addons directories
+    mkdir -p /mnt/odoo-addons && \
+    mkdir -p /mnt/extra-addons
+
+# copy a patched odoo python file that enables python debugging
+COPY ./odoo /usr/bin/odoo
+# copy an odoo configuration for local development
+COPY ./odoo.conf /etc/odoo/

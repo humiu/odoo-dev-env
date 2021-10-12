@@ -1,0 +1,14 @@
+{
+  "configurations": [
+    {
+      "name": "Attach to odoo process",
+      "type": "python",
+      "request": "attach",
+      "connect": {
+        "host": "localhost",
+        "port": 5678
+      },
+      "justMyCode": false
+    }
+  ]
+}

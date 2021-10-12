@@ -1,0 +1,11 @@
+#!/usr/bin/python3
+
+# set server timezone in UTC before time module imported
+__import__('os').environ['TZ'] = 'UTC'
+import odoo
+import debugpy
+
+if __name__ == "__main__":
+    debugpy.configure(subProcess=False)
+    debugpy.listen(5678)
+    odoo.cli.main()
