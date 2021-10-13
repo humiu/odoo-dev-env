@@ -52,7 +52,10 @@
 
   "portsAttributes": {
     "8069": {
-      "label": "odoo"
+      "label": "Odoo"
+    },
+    "8080": {
+      "label": "pgAdmin"
     }
   }
 
