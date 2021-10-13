@@ -54,8 +54,8 @@
     "8069": {
       "label": "Odoo"
     },
-    "8080": {
-      "label": "pgAdmin"
+    "8072": {
+      "label": "Odoo Longpolling"
     }
   }
 

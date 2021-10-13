@@ -133,7 +133,7 @@ The only thing you need for that is access to the Odoo Enterprise repository.
 
 5.  If you have already built a Odoo development environment before:
 
-    5.1. Make sure that you're not connected to it (e.g. by closing VS Code)
+    5.1. Make sure that you're not connected to it (e.g. by closing VS Code or by calling the "**Remote-Containers: Reopen Folder Locally**" command in the Command Palette)
 
     5.2. Delete the development environment (append a `-v` at the following command if you also want to delete all your data in your local Odoo dev env)
 
