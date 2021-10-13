@@ -40,7 +40,7 @@ RUN \
     mv /usr/bin/odoo /usr/bin/odoo-bin && \
     # create odoo addons directories
     mkdir -p /mnt/odoo-addons && \
-    mkdir -p /mnt/extra-addons
+    mkdir -p /mnt/odoo-dev-env
 
 # copy a patched odoo python file that enables python debugging
 COPY ./odoo /usr/bin/odoo
