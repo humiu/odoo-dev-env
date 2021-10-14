@@ -6,6 +6,7 @@ It's awesome, try it! 🎉
 
 ## Requirements
 
+- **Windows only**: [Windows Subsystem for Linux (WSL)](https://docs.microsoft.com/en-us/windows/wsl/) Linux environment on Windows
 - [Git](https://git-scm.com/) version control system
 - [Docker](https://www.docker.com/products/docker-desktop) container runtime
 - [VS Code](https://code.visualstudio.com/) code editor
@@ -13,12 +14,13 @@ It's awesome, try it! 🎉
 
 ## Setup
 
-> If you're using Windows:
->
-> Make sure that the **OpenSSH Authentication Agent** is activated and running.  
-> [Here's a stackoverflow answer](https://stackoverflow.com/questions/18683092/how-to-run-ssh-add-on-windows/40720527#:~:text=Update%202019%20-%20A%20better%20solution%20if%20you%27re%20using%20Windows%2010) that explains how to enable and start it.
+1. Make sure all requirements are met
 
-1. Make sure docker is up and running
+   1.1. Docker is up and running
+
+   1.2. **If you haven't setup an SSH keypair yet**: To be able to forward your git authentication into the development container you need to have **SSH keys** configured. This is as simple as calling the `ssh-keygen` command in your terminal and then accepting the default configurations by pressing enter multiple times. If you want to read more about it, you'll find detailed information in the main [Git documentation](https://git-scm.com/book/en/v2/Git-on-the-Server-Generating-Your-SSH-Public-Key), in the [GitHub Docs](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent), [GitLab Docs](https://docs.gitlab.com/ee/ssh/) and lots of other websites online.
+
+   1.3. **Windows only**: Make sure that the **OpenSSH Authentication Agent** is activated and running. [Here's a stackoverflow answer](https://stackoverflow.com/questions/18683092/how-to-run-ssh-add-on-windows/40720527#:~:text=Update%202019%20-%20A%20better%20solution%20if%20you%27re%20using%20Windows%2010) that explains how to enable and start it.
 
 2. Open a terminal and navigate to your development projects folder, e.g.
 

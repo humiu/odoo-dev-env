@@ -48,7 +48,7 @@
     "esbenp.prettier-vscode"
   ],
 
-  "initializeCommand": "ssh-add",
+  "initializeCommand": ["ssh-add"],
 
   "portsAttributes": {
     "8069": {
