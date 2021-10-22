@@ -41,9 +41,8 @@ services:
     image: dpage/pgadmin4:latest
     entrypoint: >
       sh -c "
-        cd /var/lib/pgadmin/ &&
-        cp pgadmin4.db.template pgadmin4.db &&
-        chmod 600 pgadmin4.db &&
+        cp /var/lib/pgadmin/pgadmin4.db.template /var/lib/pgadmin/pgadmin4.db &&
+        chmod 600 /var/lib/pgadmin/pgadmin4.db &&
         exec /entrypoint.sh
       "
     environment:
