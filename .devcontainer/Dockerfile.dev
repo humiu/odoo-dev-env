@@ -34,6 +34,9 @@ RUN \
     git clone https://github.com/andsens/homeshick.git "$HOME/.homesick/repos/homeshick" && \
     "$HOME/.homesick/repos/homeshick/bin/homeshick" clone -b mamiu/dotfiles && \
     "$HOME/.homesick/repos/homeshick/bin/homeshick" link -f dotfiles && \
+    # temporary fix for the odoo:14 image - works fine with the odoo:15 image
+    # (debian buster ships with fish v3.0.2 which doesn't support the gazorby/fish-abbreviation-tips plugin)
+    sed -i "s/^gazorby\/fish-abbreviation-tips//" "$HOME/.config/fish/fish_plugins" && \
     # install fish packages
     fish -c "curl -sL https://git.io/fisher | source && fisher update" && \
     # keep the old odoo binary as odoo-bin
