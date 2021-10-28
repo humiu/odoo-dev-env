@@ -103,7 +103,7 @@ It's awesome, try it! 🎉
 
 1. Go to the **Remote Explorer** extension in the VS Code sidebar
 
-2. Right click the odoo container (the container under **CONTAINERS** → **Dev Containers** with the green checkmark)
+2. Right click the odoo (`odoo_dev_env_odoo_1`) container (the container with the green checkmark in the **CONTAINERS** list)
 
    > If you can't see any containers make sure that you are in the containers view. There might be a dropdown next to the **REMOTE EXPLORER** label at the top of the sidebar where you can select **Containers**.
 
