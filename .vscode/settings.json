@@ -4,5 +4,6 @@
   "[scss]": {
     "editor.defaultFormatter": null
   },
-  "editor.formatOnSave": true
+  "editor.formatOnSave": true,
+  "terminal.integrated.fontFamily": "Fira Code"
 }
