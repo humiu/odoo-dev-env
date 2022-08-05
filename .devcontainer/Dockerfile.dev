@@ -13,7 +13,7 @@ RUN \
     # install apt-utils first cause it's a dependency for the following install commands
     apt-get install -y --no-install-recommends apt-utils && \
     # install all dev tools
-    apt-get install -y python3-pip git fish procps locales fzf fd-find ripgrep jq && \
+    apt-get install -y python3-pip git fish procps locales gawk net-tools fzf fd-find ripgrep jq && \
     # install bat (https://github.com/sharkdp/bat)
     curl -sLO https://github.com/sharkdp/bat/releases/download/v0.18.0/bat_0.18.0_amd64.deb && \
     dpkg -i bat_0.18.0_amd64.deb && rm -f bat_0.18.0_amd64.deb && \

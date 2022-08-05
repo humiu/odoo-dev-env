@@ -52,15 +52,16 @@
 
   "portsAttributes": {
     "8069": {
-      "label": "Odoo"
+      "label": "Odoo",
+      "onAutoForward": "openPreview"
     },
     "8072": {
       "label": "Odoo Longpolling"
     }
-  }
+  },
 
   // Use 'forwardPorts' to make a list of ports inside the container available locally.
-  // "forwardPorts": [],
+  "forwardPorts": [8069]
 
   // Use 'postCreateCommand' to run commands after the container is created.
   // "postCreateCommand": "pip3 install --user -r requirements.txt",

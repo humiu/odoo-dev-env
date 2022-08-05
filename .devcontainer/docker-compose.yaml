@@ -15,8 +15,6 @@ services:
     environment:
       - TZ=Etc/UTC
       - PYTHONUNBUFFERED=1
-    ports:
-      - "8069:8069"
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
       - odoo-data:/var/lib/odoo

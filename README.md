@@ -18,7 +18,7 @@ It's awesome, try it! 🎉
 
    1.1. Docker is up and running
 
-   1.2. **If you haven't setup an SSH keypair yet**: To be able to forward your git authentication into the development container you need to have **SSH keys** configured. This is as simple as calling the `ssh-keygen` command in your terminal and then accepting the default configurations by pressing enter multiple times. If you want to read more about it, you'll find detailed information in the main [Git documentation](https://git-scm.com/book/en/v2/Git-on-the-Server-Generating-Your-SSH-Public-Key), in the [GitHub Docs](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent), [GitLab Docs](https://docs.gitlab.com/ee/ssh/) and lots of other websites online.
+   1.2. **If you haven't setup an SSH keypair yet**: To be able to forward your git authentication into the [development container](https://code.visualstudio.com/docs/remote/containers) you need to have **SSH keys** configured. This is as simple as calling the `ssh-keygen` command in your terminal and then accepting the default configurations by pressing enter multiple times. If you want to read more about it, you'll find detailed information in the main [Git documentation](https://git-scm.com/book/en/v2/Git-on-the-Server-Generating-Your-SSH-Public-Key), in the [GitHub Docs](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent), [GitLab Docs](https://docs.gitlab.com/ee/ssh/) and lots of other websites online.
 
    1.3. **Windows only**: Make sure that the **OpenSSH Authentication Agent** is activated and running. [Here's a stackoverflow answer](https://stackoverflow.com/questions/18683092/how-to-run-ssh-add-on-windows/40720527#:~:text=Update%202019%20-%20A%20better%20solution%20if%20you%27re%20using%20Windows%2010) that explains how to enable and start it.
 
@@ -40,13 +40,35 @@ It's awesome, try it! 🎉
    cd odoo-dev-env
    ```
 
-5. Open it in VS Code
+5. Change git remote origin
+
+   5.1. Create a git repository on any git hosting service like [GitHub](https://github.com/) or [GitLab](https://gitlab.com/) or on you own server
+
+   5.2. Remove the current `origin` from this repository
+
+   ```bash
+   git remote remove origin
+   ```
+
+   5.3. Add your own git repository URL to this repository. E.g.
+
+   ```bash
+   git remote add origin git@github.com:yourusername/my-odoo-project.git
+   ```
+
+   5.4. The first time you want to push your odoo project to your own repository you have to specify the upstream and branch name
+
+   ```bash
+   git push --set-upstream origin main
+   ```
+
+6. Open it in VS Code
 
    ```bash
    code .
    ```
 
-6. A notification will popup saying something like
+7. A notification will popup saying something like
 
    > Folder contains a Dev Container configuration file. Reopen folder to develop in a container.
 
@@ -56,41 +78,27 @@ It's awesome, try it! 🎉
    >
    > If you still can't see the "Reopen in Container" button open the **Command Palette** (either via **View** → **Command Palette** or with the shortcut <kbd>CTRL</kbd>+<kbd>SHIFT</kbd>+<kbd>P</kbd> on Windows and Linux or <kbd>⌘</kbd>+<kbd>SHIFT</kbd>+<kbd>P</kbd> on Mac) and type "**Reopen in Container**". Choose "**Remote-Containers: Reopen in Container**" with the arrow keys (if it's not already selected) and then hit the enter key (<kbd>⏎</kbd>).
 
-7. Wait until the new Odoo development environment is built (check progress bar of "_Starting Dev Container (show log): Installing server_" notification)
+8. Wait until the new Odoo development environment is built (check progress bar of "_Starting Dev Container (show log): Installing server_" notification)
 
-8. If you don't already have the [Python](https://marketplace.visualstudio.com/items?itemName=ms-python.python) VS Code extension installed in VS Code, it'll be installed automatically in the development container. After it got installed you have to enable it by going to the **Extensions** panel in the sidebar, scroll down inside the **INSTALLED** section until you see the Python extension and click the "**Reload Required**" button. If it still says "Installing" wait until the installation is finished and then click the "**Reload Required**" button.
+9. If you don't already have the [Python](https://marketplace.visualstudio.com/items?itemName=ms-python.python) VS Code extension installed in VS Code, it'll be installed automatically in the development container. After it got installed you have to enable it by going to the **Extensions** panel in the sidebar, scroll down inside the **INSTALLED** section until you see the Python extension and click the "**Reload Required**" button. If it still says "Installing" wait until the installation is finished and then click the "**Reload Required**" button.
 
-9. Open a new terminal in VS Code (the [integrated terminal](https://code.visualstudio.com/docs/editor/integrated-terminal) of VS Code)
+10. Open a new terminal in VS Code (the [integrated terminal](https://code.visualstudio.com/docs/editor/integrated-terminal) of VS Code)
 
-10. Generate a new addon / module from a template with the `odoo-bin` [scaffold subcommand](https://www.odoo.com/documentation/15.0/developer/misc/other/cmdline.html#scaffolding)
-
-    ```bash
-    odoo-bin scaffold my_module addons
-    ```
-
-11. To debug your code go to **Run** → **Start Debugging** or go to the debugging panel in the sidebar and start the **attach to odoo process** task.
-
-12. To use your own git repository:
-
-    12.1. Create a git repository on any git hosting service like [GitHub](https://github.com/) or [GitLab](https://gitlab.com/) or on you own server
-
-    12.2. Remove the current `origin` from this repository
+11. Generate a new addon from a template with the `odoo-bin` [scaffold subcommand](https://www.odoo.com/documentation/15.0/developer/misc/other/cmdline.html#scaffolding) and replace `<MY_ODOO_ADDON>` with the name of your new Odoo addon
 
     ```bash
-    git remote remove origin
+    odoo-bin scaffold <MY_ODOO_ADDON> addons
     ```
 
-    12.3. Add your own git repository URL to this repository. E.g.
+    This command will create a new Odoo addon in the `addons` folder with the most basic files every Odoo addon needs.
 
-    ```bash
-    git remote add origin git@github.com:yourusername/my-odoo-project.git
-    ```
+12. To debug your code go to **Run** → **Start Debugging** or go to the debugging panel in the sidebar and start the **attach to odoo process** task.
 
-    12.4. The first time you want to push your odoo project to your own repository you have to specify the upstream and branch name
+13. If you want to add more folders to the current workspace (e.g. in case you want to debug another Odoo addon contained in the Docker image), you can do that with VS Codes [multi-root Workspaces](https://code.visualstudio.com/docs/editor/multi-root-workspaces) feature. There are two ways how you can do that in a VS Code [development container](https://code.visualstudio.com/docs/remote/containers) environment:
 
-    ```bash
-    git push --set-upstream origin main
-    ```
+    13.1. [From the UI](https://code.visualstudio.com/docs/editor/multi-root-workspaces#_add-folder-to-workspace): **File** > **Add Folder to Workspace**
+
+    13.2. [From the terminal](https://code.visualstudio.com/docs/editor/multi-root-workspaces#_command-line-add): `code --add <FOLDER_NAME>` (You can multiple folders at once)
 
 ## Usage
 
