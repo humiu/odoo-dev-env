@@ -20,7 +20,7 @@ It's awesome, try it! 🎉
 
    1.2. **If you haven't setup an SSH keypair yet**: To be able to forward your git authentication into the [development container](https://code.visualstudio.com/docs/remote/containers) you need to have **SSH keys** configured. This is as simple as calling the `ssh-keygen` command in your terminal and then accepting the default configurations by pressing enter multiple times. If you want to read more about it, you'll find detailed information in the main [Git documentation](https://git-scm.com/book/en/v2/Git-on-the-Server-Generating-Your-SSH-Public-Key), in the [GitHub Docs](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent), [GitLab Docs](https://docs.gitlab.com/ee/ssh/) and lots of other websites online.
 
-   1.3. **Windows only**: Make sure that the **OpenSSH Authentication Agent** is activated and running. [Here's a stackoverflow answer](https://stackoverflow.com/questions/18683092/how-to-run-ssh-add-on-windows/40720527#:~:text=Update%202019%20-%20A%20better%20solution%20if%20you%27re%20using%20Windows%2010) that explains how to enable and start it.
+   1.3. **Windows only**: Make sure that the **OpenSSH Authentication Agent** is activated and running. [Here's a stackoverflow answer](https://stackoverflow.com/questions/18683092/how-to-run-ssh-add-on-windows/40720527#40720527:~:text=Update%202019%20%2D%20A%20better%20solution%20if%20you%27re%20using%20Windows%2010) that explains how to enable and start it.
 
 2. Open a terminal and navigate to your development projects folder, e.g.
 
@@ -99,6 +99,12 @@ It's awesome, try it! 🎉
     13.1. [From the UI](https://code.visualstudio.com/docs/editor/multi-root-workspaces#_add-folder-to-workspace): **File** > **Add Folder to Workspace**
 
     13.2. [From the terminal](https://code.visualstudio.com/docs/editor/multi-root-workspaces#_command-line-add): `code --add <FOLDER_NAME>` (You can multiple folders at once)
+
+14. Adjust code formatting to your needs
+
+    14.1. Source code is formatted automatically on every save. If you don't like that, you can turn it off in the **VS Code Settings**. Make sure the **Workspace** tab is selected in the settings. Then search for **Format On Save** and untick the checkbox. Alternatively you can go to the `.vscode/settings.json` file and change the `"editor.formatOnSave"` property to `false`.
+
+    14.2. This project uses [Black](https://black.readthedocs.io/en/stable/index.html) for Python code formatting. If you want to change the formatting rules go to the `pyproject.toml` file in the addons folder and add or adjust rules [according to Blacks documentation](https://black.readthedocs.io/en/stable/usage_and_configuration/the_basics.html#configuration-via-a-file).
 
 ## Usage
 
