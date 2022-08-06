@@ -68,6 +68,8 @@ It's awesome, try it! 🎉
    code .
    ```
 
+   > If you have multiple Odoo development environments (e.g. for different projects), open the `.env` file and change the `COMPOSE_PROJECT_NAME` variable to something else than `odoo_dev_env` to prevent conflicts with your other Odoo dev envs. Adjust the commands where `odoo_dev_env` is used in this README file accordingly.
+
 7. A notification will popup saying something like
 
    > Folder contains a Dev Container configuration file. Reopen folder to develop in a container.
