@@ -1,7 +1,7 @@
 {
   "configurations": [
     {
-      "name": "Attach to odoo process",
+      "name": "Attach to Odoo process",
       "type": "python",
       "request": "attach",
       "connect": {

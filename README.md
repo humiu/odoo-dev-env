@@ -1,6 +1,6 @@
 # Odoo Development Environment
 
-This repository is a template to develop odoo addons with VS Code.
+This repository is a template to develop Odoo addons with VS Code.
 
 It's awesome, try it! 🎉
 
@@ -56,7 +56,7 @@ It's awesome, try it! 🎉
    git remote add origin git@github.com:yourusername/my-odoo-project.git
    ```
 
-   5.4. The first time you want to push your odoo project to your own repository you have to specify the upstream and branch name
+   5.4. The first time you want to push your Odoo project to your own repository you have to specify the upstream and branch name
 
    ```bash
    git push --set-upstream origin main
@@ -92,7 +92,7 @@ It's awesome, try it! 🎉
 
     This command will create a new Odoo addon in the `addons` folder with the most basic files every Odoo addon needs.
 
-12. To debug your code go to **Run** → **Start Debugging** or go to the debugging panel in the sidebar and start the **attach to odoo process** task.
+12. To debug your code go to **Run** → **Start Debugging** or go to the debugging panel in the sidebar and start the **attach to Odoo process** task.
 
 13. If you want to add more folders to the current workspace (e.g. in case you want to debug another Odoo addon contained in the Docker image), you can do that with VS Codes [multi-root Workspaces](https://code.visualstudio.com/docs/editor/multi-root-workspaces) feature. There are two ways how you can do that in a VS Code [development container](https://code.visualstudio.com/docs/remote/containers) environment:
 
@@ -110,14 +110,14 @@ It's awesome, try it! 🎉
 
 ### Odoo
 
-- **URL**: http://localhost:8069/
+- **URL**: [http://localhost:8069](http://localhost:8069)
 - **Master Password**: `MasterPassword`
 
 ### Odoo application logs
 
 1. Go to the **Remote Explorer** extension in the VS Code sidebar
 
-2. Right click the odoo (`odoo_dev_env_odoo_1`) container (the container with the green checkmark in the **CONTAINERS** list)
+2. Right click the Odoo (`odoo_dev_env_odoo_1`) container (the container with the green checkmark in the **CONTAINERS** list)
 
    > If you can't see any containers make sure that you are in the containers view. There might be a dropdown next to the **REMOTE EXPLORER** label at the top of the sidebar where you can select **Containers**.
 
@@ -125,64 +125,98 @@ It's awesome, try it! 🎉
 
 ### pgAdmin
 
-This odoo development environment repository will setup a preconfigured pgAdmin instance for you as well.  
+This Odoo development environment repository will setup a preconfigured pgAdmin instance for you as well.  
 Just login to pgAdmin and connect to the databases you want to inspect.
 
-- **URL**: http://localhost:8080/
+- **URL**: [http://localhost:8080](http://localhost:8080)
 - **Username**: `admin@pgadmin.org`
 - **Password**: `PgAdminPW!`
 
 > If the login fails with the error message "_The CSRF tokens do not match._" clear the page cache and reload the page.
-
+>
 > If your database doesn't show up, right click **Databases** (in the left sidebar of pgAdmin expand **Servers** → **Odoo Database** → **Databases**) and then **Refresh**
 
 ## Odoo Enterprise / Custom Odoo Image
 
-If you want to use this Odoo development repository with Odoo Enterprise you have to create your own odoo enterprise docker image.
+If you want to use this Odoo development repository with Odoo Enterprise you have to create your own Odoo enterprise docker image.
 
 The only thing you need for that is access to the Odoo Enterprise repository.
 
-1.  Download the Odoo Enterprise repository
+1. Download the Odoo Enterprise repository
 
-2.  Build your own Odoo Enterprise docker image.  
-    If your enterprise addons are located in the `odoo-enterprise` folder the `Dockerfile` could be as simple as that:
+2. Build your own Odoo Enterprise docker image.  
+   If your enterprise addons are located in the `odoo-enterprise` folder the `Dockerfile` could be as simple as that:
 
-    ```Dockerfile
-    FROM odoo:latest
+   ```Dockerfile
+   FROM odoo:latest
 
-    COPY --chown=odoo:odoo odoo-enterprise/ /mnt/odoo-addons/
-    ```
+   COPY --chown=odoo:odoo odoo-enterprise/ /mnt/odoo-addons/
+   ```
 
-    Or if you want the Odoo Enterprise addons as well as the Odoo Themes in your custom image your `Dockerfile` could look like that:
+   Or if you want the Odoo Enterprise addons as well as the Odoo Themes in your custom image your `Dockerfile` could look like that:
 
-    ```Dockerfile
-    FROM odoo:latest
+   ```Dockerfile
+   FROM odoo:latest
 
-    COPY --chown=odoo:odoo odoo-enterprise/ odoo-themes/ /mnt/odoo-addons/
-    ```
+   COPY --chown=odoo:odoo odoo-enterprise/ odoo-themes/ /mnt/odoo-addons/
+   ```
 
-3.  Then build the image. E.g.
+3. Then build the image. E.g.
 
-    ```bash
-    docker build -t odoo-enterprise:latest .
-    ```
+   ```bash
+   docker build -t odoo-enterprise:latest .
+   ```
 
-4.  Update the `ODOO_BASE_IMAGE` variable in the [docker-compose.yaml](./.devcontainer/docker-compose.yaml) file to your new Odoo Enterprise docker image name (e.g. `odoo-enterprise:latest`)
+4. Update the `ODOO_BASE_IMAGE` variable in the [docker-compose.yaml](./.devcontainer/docker-compose.yaml) file to your new Odoo Enterprise docker image name (e.g. `odoo-enterprise:latest`).
 
-5.  If you have already built a Odoo development environment before:
+5. If you have already built a Odoo development environment before, follow the steps described in the [Troubleshooting](#troubleshooting) section.
 
-    5.1. Make sure that you're not connected to it (e.g. by closing VS Code or by calling the "**Remote-Containers: Reopen Folder Locally**" command in the Command Palette)
+6. (Re)start VS Code, open your Odoo dev env folder and click the "**Reopen in Container**" button in the notification.
 
-    5.2. Delete the development environment (append a `-v` at the following command if you also want to delete all your data in your local Odoo dev env)
+## Shutdown Odoo Development Environment
 
-    ```bash
-    docker compose --project-name odoo_dev_env down
-    ```
+To see the status of your Docker containers execute the following command in a terminal (doesn't have to be inside your development environment):
 
-    5.3. Delete the docker image
+```bash
+docker compose --project-name odoo_dev_env ps -a
+```
 
-    ```bash
-    docker image rm odoo-local:dev
-    ```
+If you close the VS Code window with your Odoo development environment the Docker containers will be stopped. The next time you open this project in VS Code everything will be back to where it was and you can continue exactly where you left off.
 
-6.  (Re)start VS Code, open your Odoo dev env folder and click the "**Reopen in Container**" button in the notification.
+But you can also stop / start / restart your containers manually by appending `stop`, `start` or `restart` to the following command:
+
+```bash
+docker compose --project-name odoo_dev_env
+```
+
+To delete all containers of your Odoo development environment run:
+
+```bash
+docker compose --project-name odoo_dev_env down
+```
+
+(If you want to delete all the volumes as well, which contain all data of the Odoo development environment, append a `-v` to the command above.)
+
+## Troubleshooting
+
+> ⚠️ **CAUTION** ⚠️ The following steps will delete all the data of your Odoo development environment (apart from the code in the repository).
+>
+> If you still need the Odoo database go to the [Odoo Database Manager](http://localhost:8069/web/database/manager) and create a backup first.
+
+1. Make sure that you're not connected to the Odoo development environment (e.g. by closing VS Code or by calling the **Remote-Containers: Reopen Folder Locally** command from the Command Palette)
+
+2. Delete the development environment with all the data in it:
+
+   ```bash
+   docker compose --project-name odoo_dev_env down -v
+   ```
+
+3. Delete the docker image
+
+   ```bash
+   docker image rm odoo-local:dev
+   ```
+
+4. Now open the Odoo development environment again in VS Code and click the "**Reopen in Container**" button (if you're not already in the Dev Container mode). This will rebuild your Odoo Docker container and everything will be back to the default setup.
+
+If this still doesn't fix your problem, create an issue in the [official GitHub repository](https://github.com/humiu/odoo-dev-env).

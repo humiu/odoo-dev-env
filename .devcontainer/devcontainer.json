@@ -39,13 +39,14 @@
   "extensions": [
     "ms-python.python",
     "ms-python.vscode-pylance",
+    "esbenp.prettier-vscode",
+    "redhat.vscode-xml",
     "eamodio.gitlens",
+    "ms-vscode-remote.vscode-remote-extensionpack",
     "rangav.vscode-thunder-client",
     "wayou.vscode-todo-highlight",
     "fabiospampinato.vscode-todo-plus",
-    "visualstudioexptteam.vscodeintellicode",
-    "redhat.vscode-xml",
-    "esbenp.prettier-vscode"
+    "visualstudioexptteam.vscodeintellicode"
   ],
 
   "initializeCommand": ["ssh-add"],
@@ -53,7 +54,7 @@
   "portsAttributes": {
     "8069": {
       "label": "Odoo",
-      "onAutoForward": "openPreview"
+      "onAutoForward": "openBrowserOnce"
     },
     "8072": {
       "label": "Odoo Longpolling"
