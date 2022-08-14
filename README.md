@@ -68,7 +68,7 @@ It's awesome, try it! 🎉
    code .
    ```
 
-   > If you have multiple Odoo development environments (e.g. for different projects), open the `.env` file and change the `COMPOSE_PROJECT_NAME` variable to something else than `odoo_dev_env` to prevent conflicts with your other Odoo dev envs. Adjust the commands where `odoo_dev_env` is used in this README file accordingly.
+   > If you have multiple Odoo development environments (e.g. for different projects), open the [.env](./.env) file in the root directory of this repository and change the `COMPOSE_PROJECT_NAME` variable to something else than `odoo_dev_env` to prevent conflicts with your other Odoo dev envs. Also adjust the commands where `odoo_dev_env` is used in this README file accordingly.
 
 7. A notification will popup saying something like
 
@@ -169,7 +169,7 @@ The only thing you need for that is access to the Odoo Enterprise repository.
    docker build -t odoo-enterprise:latest .
    ```
 
-4. Update the `ODOO_BASE_IMAGE` variable in the [docker-compose.yaml](./.devcontainer/docker-compose.yaml) file to your new Odoo Enterprise docker image name (e.g. `odoo-enterprise:latest`).
+4. Update the `ODOO_BASE_IMAGE` variable in the [.env](./.devcontainer/.env) file (the one in the `.devcontainer` folder) to your new Odoo Enterprise docker image name (e.g. `odoo-enterprise:latest`).
 
 5. If you have already built a Odoo development environment before, follow the steps described in the [Troubleshooting](#troubleshooting) section.
 
@@ -216,7 +216,7 @@ docker compose --project-name odoo_dev_env down
 3. Delete the docker image
 
    ```bash
-   docker image rm odoo-local:dev
+   docker image rm odoo-dev:local
    ```
 
 4. Now open the Odoo development environment again in VS Code and click the "**Reopen in Container**" button (if you're not already in the Dev Container mode). This will rebuild your Odoo Docker container and everything will be back to the default setup.

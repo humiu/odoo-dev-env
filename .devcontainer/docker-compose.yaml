@@ -2,13 +2,12 @@ version: "3"
 
 services:
   odoo:
-    image: odoo-local:dev
+    image: odoo-dev:local
     build:
       context: .
       dockerfile: Dockerfile.dev
       args:
-        # change the ODOO_BASE_IMAGE variable to whatever docker image you want to use
-        - ODOO_BASE_IMAGE=odoo:15
+        - ODOO_BASE_IMAGE=$ODOO_BASE_IMAGE
     command: --dev all
     depends_on:
       - db
