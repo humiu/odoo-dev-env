@@ -44,9 +44,9 @@
     "eamodio.gitlens",
     "ms-vscode-remote.vscode-remote-extensionpack",
     "rangav.vscode-thunder-client",
-    "wayou.vscode-todo-highlight",
     "fabiospampinato.vscode-todo-plus",
-    "visualstudioexptteam.vscodeintellicode"
+    "visualstudioexptteam.vscodeintellicode",
+    "Gruntfuggly.todo-tree"
   ],
 
   "initializeCommand": ["ssh-add"],

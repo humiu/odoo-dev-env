@@ -22,6 +22,11 @@ RUN \
     tar xvzf fzf-0.26.0-linux_amd64.tar.gz && mv fzf /usr/local/bin/ && rm -f fzf-0.26.0-linux_amd64.tar.gz && \
     # generate locale
     sed -i '/en_US.UTF-8/s/^# //g' /etc/locale.gen && locale-gen && \
+    # fix pip3 (see: https://stackoverflow.com/a/74410548/2524925)
+    python_openssl_crypto_file="/usr/lib/python3/dist-packages/OpenSSL/crypto.py" && \
+    search_term="CB_ISSUER_CHECK = _lib.X509_V_FLAG_CB_ISSUER_CHECK" && \
+    cb_issuer_check_line_number="$(awk "/$search_term/ {print FNR}" $python_openssl_crypto_file)" && \
+    sed -i "${cb_issuer_check_line_number}s/.*/    # $search_term/" $python_openssl_crypto_file && \
     # install python development modules
     pip3 install black pylint flake8 debugpy && \
     # install docker

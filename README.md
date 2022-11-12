@@ -68,9 +68,11 @@ It's awesome, try it! 🎉
    code .
    ```
 
-   > If you have multiple Odoo development environments (e.g. for different projects), open the [.env](./.env) file in the root directory of this repository and change the `COMPOSE_PROJECT_NAME` variable to something else than `odoo_dev_env` to prevent conflicts with your other Odoo dev envs. Also adjust the commands where `odoo_dev_env` is used in this README file accordingly.
+   > If you have multiple Odoo development environments (e.g. for different projects), open the [`.env`](./.env) file in the root directory of this repository and change the `COMPOSE_PROJECT_NAME` variable to something else than `odoo_dev_env` to prevent conflicts with your other Odoo dev envs. Also adjust the commands where `odoo_dev_env` is used in this README file accordingly.
 
-7. A notification will popup saying something like
+7. If you want to use a different Odoo docker image, adjust the ODOO_BASE_IMAGE variable in the [`.devcontainer/.env`](./.devcontainer/.env) file accordingly
+
+8. A notification popup appeared when opening VS Code saying something like
 
    > Folder contains a Dev Container configuration file. Reopen folder to develop in a container.
 
@@ -80,13 +82,13 @@ It's awesome, try it! 🎉
    >
    > If you still can't see the "Reopen in Container" button open the **Command Palette** (either via **View** → **Command Palette** or with the shortcut <kbd>CTRL</kbd>+<kbd>SHIFT</kbd>+<kbd>P</kbd> on Windows and Linux or <kbd>⌘</kbd>+<kbd>SHIFT</kbd>+<kbd>P</kbd> on Mac) and type "**Reopen in Container**". Choose "**Remote-Containers: Reopen in Container**" with the arrow keys (if it's not already selected) and then hit the enter key (<kbd>⏎</kbd>).
 
-8. Wait until the new Odoo development environment is built (check progress bar of "_Starting Dev Container (show log): Installing server_" notification)
+9. Wait until the new Odoo development environment is built (check progress bar of "_Starting Dev Container (show log): Installing server_" notification)
 
-9. If you don't already have the [Python](https://marketplace.visualstudio.com/items?itemName=ms-python.python) VS Code extension installed in VS Code, it'll be installed automatically in the development container. After it got installed you have to enable it by going to the **Extensions** panel in the sidebar, scroll down inside the **INSTALLED** section until you see the Python extension and click the "**Reload Required**" button. If it still says "Installing" wait until the installation is finished and then click the "**Reload Required**" button.
+10. If you don't already have the [Python](https://marketplace.visualstudio.com/items?itemName=ms-python.python) VS Code extension installed in VS Code, it'll be installed automatically in the development container. After it got installed you have to enable it by going to the **Extensions** panel in the sidebar, scroll down inside the **INSTALLED** section until you see the Python extension and click the "**Reload Required**" button. If it still says "Installing" wait until the installation is finished and then click the "**Reload Required**" button.
 
-10. Open a new terminal in VS Code (the [integrated terminal](https://code.visualstudio.com/docs/editor/integrated-terminal) of VS Code)
+11. Open a new terminal in VS Code (the [integrated terminal](https://code.visualstudio.com/docs/editor/integrated-terminal) of VS Code)
 
-11. Generate a new addon from a template with the `odoo-bin` [scaffold subcommand](https://www.odoo.com/documentation/15.0/developer/misc/other/cmdline.html#scaffolding) and replace `<MY_ODOO_ADDON>` with the name of your new Odoo addon
+12. Generate a new addon from a template with the `odoo-bin` [scaffold subcommand](https://www.odoo.com/documentation/15.0/developer/misc/other/cmdline.html#scaffolding) and replace `<MY_ODOO_ADDON>` with the name of your new Odoo addon
 
     ```bash
     odoo-bin scaffold <MY_ODOO_ADDON> addons
@@ -94,19 +96,19 @@ It's awesome, try it! 🎉
 
     This command will create a new Odoo addon in the `addons` folder with the most basic files every Odoo addon needs.
 
-12. To debug your code go to **Run** → **Start Debugging** or go to the debugging panel in the sidebar and start the **attach to Odoo process** task.
+13. To debug your code go to **Run** → **Start Debugging** or go to the debugging panel in the sidebar and start the **attach to Odoo process** task.
 
-13. If you want to add more folders to the current workspace (e.g. in case you want to debug another Odoo addon contained in the Docker image), you can do that with VS Codes [multi-root Workspaces](https://code.visualstudio.com/docs/editor/multi-root-workspaces) feature. There are two ways how you can do that in a VS Code [development container](https://code.visualstudio.com/docs/remote/containers) environment:
+14. If you want to add more folders to the current workspace (e.g. in case you want to debug another Odoo addon contained in the Docker image), you can do that with VS Codes [multi-root Workspaces](https://code.visualstudio.com/docs/editor/multi-root-workspaces) feature. There are two ways how you can do that in a VS Code [development container](https://code.visualstudio.com/docs/remote/containers) environment:
 
-    13.1. [From the UI](https://code.visualstudio.com/docs/editor/multi-root-workspaces#_add-folder-to-workspace): **File** > **Add Folder to Workspace**
+    14.1. [From the UI](https://code.visualstudio.com/docs/editor/multi-root-workspaces#_add-folder-to-workspace): **File** > **Add Folder to Workspace**
 
-    13.2. [From the terminal](https://code.visualstudio.com/docs/editor/multi-root-workspaces#_command-line-add): `code --add <FOLDER_NAME>` (You can multiple folders at once)
+    14.2. [From the terminal](https://code.visualstudio.com/docs/editor/multi-root-workspaces#_command-line-add): `code --add <FOLDER_NAME>` (You can multiple folders at once)
 
-14. Adjust code formatting to your needs
+15. Adjust code formatting to your needs
 
-    14.1. Source code is formatted automatically on every save. If you don't like that, you can turn it off in the **VS Code Settings**. Make sure the **Workspace** tab is selected in the settings. Then search for **Format On Save** and untick the checkbox. Alternatively you can go to the `.vscode/settings.json` file and change the `"editor.formatOnSave"` property to `false`.
+    15.1. Source code is formatted automatically on every save. If you don't like that, you can turn it off in the **VS Code Settings**. Make sure the **Workspace** tab is selected in the settings. Then search for **Format On Save** and untick the checkbox. Alternatively you can go to the `.vscode/settings.json` file and change the `"editor.formatOnSave"` property to `false`.
 
-    14.2. This project uses [Black](https://black.readthedocs.io/en/stable/index.html) for Python code formatting. If you want to change the formatting rules go to the `pyproject.toml` file in the addons folder and add or adjust rules [according to Blacks documentation](https://black.readthedocs.io/en/stable/usage_and_configuration/the_basics.html#configuration-via-a-file).
+    15.2. This project uses [Black](https://black.readthedocs.io/en/stable/index.html) for Python code formatting. If you want to change the formatting rules go to the `pyproject.toml` file in the addons folder and add or adjust rules [according to Blacks documentation](https://black.readthedocs.io/en/stable/usage_and_configuration/the_basics.html#configuration-via-a-file).
 
 ## Usage
 
